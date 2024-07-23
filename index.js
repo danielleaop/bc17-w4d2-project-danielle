@@ -3,11 +3,7 @@ import helmet from "helmet";
 
 const app = express();
 // Use Helmet!
-app.use(
-  helmet({
-    xPoweredBy: false,
-  })
-);
+app.use(helmet());
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello World!");
