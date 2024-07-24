@@ -1,34 +1,32 @@
 import express from "express";
 import helmet from "helmet";
 import { v4 as uuidv4 } from "uuid";
+
 const userActivity = [
+  {
+    id: uuidv4(),
+    activity_submitted: Date.now(),
+    activity_type: "run",
+    activity_duration: "30",
+  },
 
-    {
-        "id": "00001",
-        "activity_submitted": "1721823943",
-        "activity_type": "run",
-        "activity_duration": "30"
-    },
+  {
+    id: uuidv4(),
+    activity_submitted: Date.now(),
+    activity_type: "squats",
+    activity_duration: "10",
+  },
 
-    {
-        "id": "00002",
-        "activity_submitted": "1721824063",
-        "activity_type": "squats",
-        "activity_duration": "10"
-    },
-
-    {
-        "id": "00003",
-        "activity_submitted": "1721824173",
-        "activity_type": "walk",
-        "activity_duration": "15"
-    }
-
-]
-
+  {
+    id: uuidv4(),
+    activity_submitted: Date.now(),
+    activity_type: "walk",
+    activity_duration: "15",
+  },
+];
 
 const app = express();
-
+app.use(express.json());
 
 app.use(helmet());
 
@@ -37,23 +35,35 @@ app.get("/", (req, res) => {
 });
 
 app.get("/activities", (req, res) => {
-  res.status(200).json(
-    {
-      "success": true,
-      "payload": userActivity
-    }
-  );
+  res.status(200).json({
+    success: true,
+    payload: userActivity,
+  });
 });
 
 app.post("/activities", (req, res) => {
-    const newActivity = req.body.newActivity;
-    userActivity.push(newActivity);
+  const newActivity = req.body.newActivity;
 
-    res.status(201).json(
-        {
-            "success": true,
-            "payload": newActivity
-        });
+  if (!newActivity) {
+    res.status(400).json({
+      error: true,
+      data: null,
+    });
+  }
+  const activity = {
+    ...newActivity,
+    id: uuidv4(),
+    activity_submitted: Date.now(),
+  };
+
+  userActivity.push(activity);
+
+  console.log(userActivity);
+
+  res.status(201).json({
+    success: true,
+    payload: newActivity,
+  });
 });
 
 app.listen(3000, () => {
