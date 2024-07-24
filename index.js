@@ -1,7 +1,31 @@
 import express from "express";
 import helmet from "helmet";
-import info from "./userActivity.json" with {type: "json"};
 import { v4 as uuidv4 } from "uuid";
+const userActivity = [
+
+    {
+        "id": "00001",
+        "activity_submitted": "1721823943",
+        "activity_type": "run",
+        "activity_duration": "30"
+    },
+
+    {
+        "id": "00002",
+        "activity_submitted": "1721824063",
+        "activity_type": "squats",
+        "activity_duration": "10"
+    },
+
+    {
+        "id": "00003",
+        "activity_submitted": "1721824173",
+        "activity_type": "walk",
+        "activity_duration": "15"
+    }
+
+]
+
 
 const app = express();
 
@@ -13,20 +37,24 @@ app.get("/", (req, res) => {
 });
 
 app.get("/activities", (req, res) => {
-  res.status(200).json( 
+  res.status(200).json(
     {
-      success: true,
-      payload: info,
+      "success": true,
+      "payload": userActivity
     }
   );
 });
 
 app.post("/activities", (req, res) => {
-  //try
+    const newActivity = req.body.newActivity;
+    userActivity.push(newActivity);
 
-
-  //catch
-})
+    res.status(201).json(
+        {
+            "success": true,
+            "payload": newActivity
+        });
+});
 
 app.listen(3000, () => {
   console.log("Request logged.");
