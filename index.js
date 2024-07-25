@@ -4,21 +4,21 @@ import { v4 as uuidv4 } from "uuid";
 
 const userActivity = [
   {
-    id: uuidv4(),
+    id: "a8c6982f-64d3-46f3-9996-a81c53d95f11",
     activity_submitted: Date.now(),
     activity_type: "run",
     activity_duration: "30",
   },
 
   {
-    id: uuidv4(),
+    id: "7676f726-e9ed-4f74-a71c-8fbb526c997a",
     activity_submitted: Date.now(),
     activity_type: "squats",
     activity_duration: "10",
   },
 
   {
-    id: uuidv4(),
+    id: "55540867-c204-442f-bb46-968c1f1ebd84",
     activity_submitted: Date.now(),
     activity_type: "walk",
     activity_duration: "15",
@@ -64,6 +64,19 @@ app.post("/activities", (req, res) => {
     success: true,
     payload: newActivity,
   });
+});
+
+app.put("/activities/:id", (req, res) => {
+  const validID = req.params.id
+ 
+  
+  if (!validID) {
+    res.status(400).json({
+      error: true,
+      data: null,
+    });
+//set activityUpdate variable as 
+}
 });
 
 app.listen(3000, () => {
