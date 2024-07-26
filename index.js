@@ -106,9 +106,34 @@ app.put("/activities/:id", (req, res) => {
 
 //Delete existing activity with matching ID
 
-function deleteActivityByID() {}
+function deleteActivityByID(requestId) {
+  const index = userActivity.findIndex(({ id }) => id === requestId);
+  if (index === -1) {
+    return { success: false, data: null };
+  }
+  const deleted = userActivity[index];
+  userActivity.splice(index, 1);
+  return { success: true, data: deleted };
+}
 
-app.delete("activities/:id"), (req, res) => {};
+app.delete("/activities/:id", (req, res) => {
+  const deletedActivity = deleteActivityByID(
+    req.params.id,
+    req.body.userActivity
+  );
+
+  if (!deletedActivity.success) {
+    return res.status(400).json({
+      error: true,
+      data: null,
+    });
+  }
+
+  res.status(201).json({
+    success: true,
+    payload: deleteActivityByID.data,
+  });
+});
 
 app.listen(3000, () => {
   console.log("Request logged.");
