@@ -56,6 +56,7 @@ app.post("/activities", (req, res) => {
       data: null,
     });
   }
+  if (newActivity) {
   const activities = {
     ...newActivity,
     id: uuidv4(),
@@ -70,6 +71,7 @@ app.post("/activities", (req, res) => {
     success: true,
     payload: activities,
   });
+};
 });
 
 // PUT to update an existing activity
