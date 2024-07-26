@@ -1,13 +1,16 @@
 
 # 🏊‍♀️🏋🏾‍♀️Activity API (Tracking App)🤺⛹🏾‍♀️
 
-Welcome to Activity API. This API allows users to track their activities, create activities, change and delete them using unique ID codes.
+Welcome to Activity API. As humans, tracking our productivity is very important as it helps us see where we've progressed and how we might improve in our fitness journeys especially. 
+
+This API allows users to track their activities, create activities, change and delete them using unique ID codes.
 
 
 
 ## ⬆️ ⬆️ ⬆️ Installation ⬆️ ⬆️ ⬆️
 
 Command: "npm install"
+
 Install dependencies:
 "express", "helmet" and "uuid"
 
