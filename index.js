@@ -30,9 +30,13 @@ app.use(express.json());
 
 app.use(helmet());
 
+//Hello World
+
 app.get("/", (req, res) => {
   res.status(200).send("Hello World!");
 });
+
+//Get request to read data
 
 app.get("/activities", (req, res) => {
   res.status(200).json({
@@ -40,6 +44,8 @@ app.get("/activities", (req, res) => {
     payload: userActivity,
   });
 });
+
+//POST request to add new activity
 
 app.post("/activities", (req, res) => {
   const newActivity = req.body.newActivity;
@@ -50,34 +56,59 @@ app.post("/activities", (req, res) => {
       data: null,
     });
   }
-  const activity = {
+  const activities = {
     ...newActivity,
     id: uuidv4(),
     activity_submitted: Date.now(),
   };
 
-  userActivity.push(activity);
+  userActivity.push(activities);
 
   console.log(userActivity);
 
   res.status(201).json({
     success: true,
-    payload: newActivity,
+    payload: activities,
   });
 });
 
+// PUT to update an existing activity
+
+function updateActivityById(requestId, updates) {
+  {
+    const index = userActivity.findIndex(({ id }) => id === requestId);
+
+    if (index === -1) {
+      return { success: false, data: null };
+    }
+    userActivity[index] = { ...userActivity[index], ...updates };
+    return { success: true, data: userActivity[index] };
+  }
+}
+
 app.put("/activities/:id", (req, res) => {
-  const validID = req.params.id
- 
-  
-  if (!validID) {
-    res.status(400).json({
+  const updatedActivity = updateActivityById(
+    req.params.id,
+    req.body.userActivity
+  );
+
+  if (!updatedActivity.success) {
+    return res.status(400).json({
       error: true,
       data: null,
     });
-//set activityUpdate variable as 
-}
+  }
+  res.status(201).json({
+    success: true,
+    payload: updatedActivity.data,
+  });
 });
+
+//Delete existing activity with matching ID
+
+function deleteActivityByID() {}
+
+app.delete("activities/:id"), (req, res) => {};
 
 app.listen(3000, () => {
   console.log("Request logged.");
