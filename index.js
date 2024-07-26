@@ -133,7 +133,7 @@ app.delete("/activities/:id", (req, res) => {
 
   res.status(201).json({
     success: true,
-    payload: deleteActivityByID.data,
+    payload: userActivity,
   });
 });
 
