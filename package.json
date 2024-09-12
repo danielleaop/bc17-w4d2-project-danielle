@@ -4,7 +4,9 @@
   "description": "Feel free to delete this and start from scratch.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "lint": "eslint **/*.js --ignore-pattern node_modules/eslint"
   },
   "type": "module",
   "keywords": [],
@@ -15,5 +17,11 @@
     "express-validator": "^7.1.0",
     "helmet": "^7.1.0",
     "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6"
   }
 }
