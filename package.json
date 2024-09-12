@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky",
-    "lint": "eslint **/*.js --ignore-pattern node_modules/eslint"
+    "lint": "eslint",
+    "format": "prettier --check"
   },
   "type": "module",
   "keywords": [],
@@ -16,11 +17,13 @@
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
     "helmet": "^7.1.0",
+    "prettier": "^3.3.3",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
     "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
     "globals": "^15.9.0",
     "husky": "^9.1.6"
   }
